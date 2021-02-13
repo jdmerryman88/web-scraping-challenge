@@ -31,6 +31,8 @@ def home():
 @flask_app.route("/scrape")
 def scrape():
     
+    render_template('index2.html')
+
     collection.drop()
     time.sleep(10)
 
@@ -44,6 +46,9 @@ def scrape():
 
     # Redirect back to home page
     return redirect("/")
+
+
+
 
 if __name__ == '__main__':
     # start flask server

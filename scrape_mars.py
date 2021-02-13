@@ -21,7 +21,7 @@ from pymongo import MongoClient
 def scrape():
 # Setup splinter
     executable_path = {'executable_path': ChromeDriverManager().install()}
-    browser = Browser('chrome', **executable_path, headless=True)
+    browser = Browser('chrome', **executable_path, headless=False)
 
 
     # In[3]:
@@ -51,13 +51,13 @@ def scrape():
 
 
     news = {'title' : news_title, 'image_url' : news_p}
-
+    browser.quit()
     return news 
     # In[6]:
 
 def scrape2():
     executable_path = {'executable_path': ChromeDriverManager().install()}
-    browser = Browser('chrome', **executable_path, headless=True)
+    browser = Browser('chrome', **executable_path, headless=False)
 
     
     url2 = 'https://space-facts.com/mars/'
@@ -168,7 +168,7 @@ def scrape2():
 
 
 # In[ ]:
-
+    browser.quit()
     return hemisphere_image_urls
 
 
