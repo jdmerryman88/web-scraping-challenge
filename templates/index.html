@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
 
   <title>Mission to Mars</title>
-  <link rel="stylesheet" href="style.css">
+  <link type="text/css" rel="stylesheet" href="style.css">
   
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -90,9 +90,21 @@
   </table>
 
   <br>
-  {% for image in images %}
-  <img src="{{ image.image_url }}">image['title']</img>
-  <h4>{{ image['title'] }}</h4>
+  <div class="container content bg-white">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <h2 class="text-left">Mars Hemispheres</h2>
+      <hr class="my-4">
+    </div>
+    {% for image in images %}
+  <!-- <img src="{{ image.image_url }}">image['title']</img>
+  <h4>{{ image['title'] }}</h4> -->
+    <div class="row">
+      
+      <div class="col-md-6">
+        <img src="{{ image.image_url }}">image['title']</img>
+        <h4>{{ image['title'] }}</h4>
+    </div>
+  
 
   {% endfor %}
 

@@ -31,7 +31,6 @@ def home():
 @flask_app.route("/scrape")
 def scrape():
     
-    render_template('index2.html')
 
     collection.drop()
     time.sleep(10)
