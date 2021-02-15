@@ -1,114 +1,67 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Mission to Mars</title>
-  <link type="text/css" rel="stylesheet" href="style.css">
-  
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   
 </head>
 
 <body>
-  <h1>
-    Mission to Mars
-  </h1>
-  <a class="btn btn-primary" href="http://127.0.0.1:5000/scrape" role="button">Scrape New Data</a>
-  <hr>
-  <br>
+  <div class="container">
 
-  <h3>{% for test in tests %}
-    <h2>{{ test['title'] }}</h2>
-    <h3>{{test['image_url']}}</h3>
-
-
-    {% endfor %}
-
-  </h3>
-  <table border="1" class="dataframe">
-    <thead>
-      <tr style="text-align: right;">
-        <th></th>
-        <th>Mars</th>
-      </tr>
-      <tr>
-        <th>Description</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th>Equatorial Diameter:</th>
-        <td>6,792 km</td>
-      </tr>
-      <tr>
-        <th>Polar Diameter:</th>
-        <td>6,752 km</td>
-      </tr>
-      <tr>
-        <th>Mass:</th>
-        <td>6.39 × 10^23 kg (0.11 Earths)</td>
-      </tr>
-      <tr>
-        <th>Moons:</th>
-        <td>2 (Phobos &amp; Deimos)</td>
-      </tr>
-      <tr>
-        <th>Orbit Distance:</th>
-        <td>227,943,824 km (1.38 AU)</td>
-      </tr>
-      <tr>
-        <th>Orbit Period:</th>
-        <td>687 days (1.9 years)</td>
-      </tr>
-      <tr>
-        <th>Surface Temperature:</th>
-        <td>-87 to -5 °C</td>
-      </tr>
-      <tr>
-        <th>First Record:</th>
-        <td>2nd millennium BC</td>
-      </tr>
-      <tr>
-        <th>Recorded By:</th>
-        <td>Egyptian astronomers</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <br>
-  <div class="container content bg-white">
-    <div class="col-sm-12 col-md-12 col-lg-12">
-      <h2 class="text-left">Mars Hemispheres</h2>
-      <hr class="my-4">
+    <div class="jumbotron text-center border-bottom">
+      <h1 class="font-weight-bold">Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="../scrape" role="button">Scrape New Data</a></p>
     </div>
-    {% for image in images %}
-  <!-- <img src="{{ image.image_url }}">image['title']</img>
-  <h4>{{ image['title'] }}</h4> -->
+
     <div class="row">
-      
-      <div class="col-md-6">
-        <img src="{{ image.image_url }}">image['title']</img>
-        <h4>{{ image['title'] }}</h4>
+      <div class="col-md-12">
+        <h2><u>Latest Mars News</u></h2>
+      </div>
     </div>
+  </br>
+    <div class="row">
+      <div class="col-md-12">
+        {% for test in tests %}
+          <h2>{{ test['title'] }}</h2>
+          <h3>{{test['image_url']}}</h3>
+        {% endfor %}
+      </div>
+    </div>
+  <hr>
+    
+  <hr>
+    <div class="row">
+      <div class="col-md-8 offset-4">
+        <h2 class="align-items-center"><u>Mars hemispheres</u></h2>  
+      </div>
+    </div>
+    </br>
+    <div class="row">       
+      {% for image in images %} 
+              <div class="col-6 border">
+              </br>
+                    <div>
+                      <img width="512 px" height="512 px" src="{{ image.image_url }}">
+                    </div>
+
+                    <div>
+                      <h4> {{ image['title'] }} </h4>  
+                    </div>
+            
+              </div>
+            {% endfor %}
+    </div> 
+
+  <hr>
   
-
-  {% endfor %}
-
-
 </body>
 
 </html>
