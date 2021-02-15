@@ -25,7 +25,8 @@ def home():
 
    mars = collection.find()
    test2 = news.find()
-   return render_template('index.html', images=mars, tests =test2)
+  
+   return render_template('index.html', images=mars, tests =test2 )
    
 # Route that will trigger the scrape function
 @flask_app.route("/scrape")
