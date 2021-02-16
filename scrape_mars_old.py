@@ -18,12 +18,10 @@ from pymongo import MongoClient
 
 # In[2]:
 
-
 def scrape():
 # Setup splinter
     executable_path = {'executable_path': ChromeDriverManager().install()}
     browser = Browser('chrome', **executable_path, headless=False)
-    browser2 = Browser('chrome', **executable_path, headless=False)
 
 
     # In[3]:
@@ -40,38 +38,39 @@ def scrape():
     #print(soup.prettify())
 
 
-    # In[4]:
+    # In[58]:
 
 
-    mars_info = {}
     news_title = soup.find_all('div', class_= "content_title")[1].text
     print(news_title)
     news_p = soup.find('div', class_= "article_teaser_body").text
     print(news_p)
 
 
-    # In[5]:
+    # In[59]:
 
 
-
-    mars_info['title'] = news_title
-    mars_info['paragraph'] = news_p
-
-
+    news = {'title' : news_title, 'image_url' : news_p}
+    browser.quit()
+    return news 
     # In[6]:
 
+def scrape2():
+    executable_path = {'executable_path': ChromeDriverManager().install()}
+    browser = Browser('chrome', **executable_path, headless=False)
 
+    
     url2 = 'https://space-facts.com/mars/'
 
 
-    # In[7]:
+    # In[70]:
 
 
     tables = pd.read_html(url2)
     tables
 
 
-    # In[8]:
+    # In[75]:
 
 
     df = tables[0]
@@ -86,15 +85,13 @@ def scrape():
 
 
 
-    # In[9]:
-    table = df.to_html()
+    # In[76]:
+
 
     df.to_html('table.html')
-    
-    mars_info['table'] = table 
 
 
-    # In[10]:
+    # In[23]:
 
 
     # connect to mongo
@@ -102,7 +99,7 @@ def scrape():
     mongo_client = MongoClient(mongodb_url)
 
 
-    # In[11]:
+    # In[61]:
 
 
     # get handle to mongo db and create collection
@@ -111,25 +108,24 @@ def scrape():
     new = mongo_db.news
 
 
-    # In[12]:
+    # In[62]:
 
 
     url3 = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
-    browser2.visit(url3)
+    browser.visit(url3)
 
 
-    # In[13]:
+    # In[63]:
 
 
     hemisphere_image_urls= []
-    titles = []
-    image_urls = []
+    
 
 
-    # In[14]:
+    # In[64]:
 
 
-    html = browser2.html
+    html = browser.html
     soup3 = BeautifulSoup(html, 'html.parser')
     hemispheres = soup3.find_all('div' , class_='item')
 
@@ -137,50 +133,42 @@ def scrape():
         title= hemisphere.find('h3').text
         search_link = hemisphere.find("a")["href"]  
         complete_link = "https://astrogeology.usgs.gov/" + search_link
-        browser2.visit(complete_link)
-        html = browser2.html
+        browser.visit(complete_link)
+        html = browser.html
         soup3 = BeautifulSoup(html, 'html.parser')
         image_url = soup3.find('li')
         image_url = image_url.find("a")["href"]
         hemisphere_image_urls.append({'title': title, 'image_url':image_url})
-        mars_info['hemispheres'] = hemisphere_image_urls
         
-    print(hemisphere_image_urls)
+    #print(hemisphere_image_urls)
 
 
-    # In[15]:
+    # In[66]:
 
 
+    # new.insert_one(news)
+
+
+    # In[51]:
+
+
+    # collection.insert_many(hemisphere_image_urls)
+
+
+    # In[60]:
+
+
+ 
+
+    
+# In[ ]:
+
+
+
+
+
+# In[ ]:
     browser.quit()
-    browser2.quit()
-
-    return mars_info
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
+    return hemisphere_image_urls
 
 

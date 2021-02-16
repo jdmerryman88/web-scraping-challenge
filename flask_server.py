@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect
 from pymongo import MongoClient
 import scrape_mars
-import time
+
 
 
 # MONGODB
@@ -10,9 +10,7 @@ mongodb_url = 'mongodb://localhost:27017'
 mongo_client = MongoClient(mongodb_url)
 
 # get handle to mongo db and create collection
-mongo_db = mongo_client.mars_db
-collection = mongo_db.mars
-news = mongo_db.news
+mars = mongo_client.mars_db
 
 
 # FLASK
@@ -23,29 +21,21 @@ flask_app = Flask(__name__)
 @flask_app.route('/')
 def home():
 
-   mars = collection.find()
-   test2 = news.find()
+   mars_info = mars.mars_info.find_one()
   
-   return render_template('index.html', images=mars, tests =test2 )
+   return render_template('index2.html', mars_info=mars_info)
    
 # Route that will trigger the scrape function
 @flask_app.route("/scrape")
 def scrape():
     
 
-    collection.drop()
-    time.sleep(10)
+    mars_info = mars.mars_info
+    mars_data = scrape_mars.scrape()
+    mars_info.update({}, mars_data, upsert=True)
 
-    
-    news_data = scrape_mars.scrape()
-    news.update({}, news_data, upsert=True)
-
-    
-    hemisphere = scrape_mars.scrape2()
-    collection.insert_many(hemisphere)
-
-    # Redirect back to home page
-    return redirect("/")
+# Redirect back to home page
+    return redirect("/", code =302)
 
 
 
