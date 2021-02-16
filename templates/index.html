@@ -6,146 +6,74 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Mission to Mars</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  
+
 </head>
 
-<body>
-  <div class="container">
+<div class="jumbotron text-center border-bottom">
+  <h1 class="font-weight-bold">Mission to Mars</h1>
+  <p><a class="btn btn-primary btn-lg" href="../scrape" role="button">Scrape New Data</a></p>
+</div>
 
-    <div class="jumbotron text-center border-bottom">
-      <h1 class="font-weight-bold">Mission to Mars</h1>
-      <p><a class="btn btn-primary btn-lg" href="../scrape" role="button">Scrape New Data</a></p>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12">
-        <h2><u>Latest Mars News</u></h2>
-      </div>
-    </div>
-  </br>
-    <div class="row">
-      <div class="col-md-12">
-        {% for test in tests %}
-          <h2>{{ test['title'] }}</h2>
-          <h3>{{test['image_url']}}</h3>
-        {% endfor %}
-      </div>
-    </div>
-  <hr>
-  <div class="row">
-      <div class="col-md-8 border">
-        <h2 class=""><u>Featured Mars Image</u></h2> 
-        </br>
-        <img src="mission_to_mars.png" alt="Features Mars Image">
-      </div>
-      <div class="col-md-4">
-        <div class="border">
-          <h5>Mars Facts</h5>
-          <table border="1" class="dataframe">
-            <thead>
-              <tr style="text-align: right;">
-                <th></th>
-                <th>Mars</th>
-              </tr>
-              <tr>
-                <th>Description</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>Equatorial Diameter:</th>
-                <td>6,792 km</td>
-              </tr>
-              <tr>
-                <th>Polar Diameter:</th>
-                <td>6,752 km</td>
-              </tr>
-              <tr>
-                <th>Mass:</th>
-                <td>6.39 × 10^23 kg (0.11 Earths)</td>
-              </tr>
-              <tr>
-                <th>Moons:</th>
-                <td>2 (Phobos &amp; Deimos)</td>
-              </tr>
-              <tr>
-                <th>Orbit Distance:</th>
-                <td>227,943,824 km (1.38 AU)</td>
-              </tr>
-              <tr>
-                <th>Orbit Period:</th>
-                <td>687 days (1.9 years)</td>
-              </tr>
-              <tr>
-                <th>Surface Temperature:</th>
-                <td>-87 to -5 °C</td>
-              </tr>
-              <tr>
-                <th>First Record:</th>
-                <td>2nd millennium BC</td>
-              </tr>
-              <tr>
-                <th>Recorded By:</th>
-                <td>Egyptian astronomers</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  <hr>
-    <div class="row">
-      <div class="col-md-8 offset-4">
-        <h2 class="align-items-center"><u>Mars hemispheres</u></h2>  
-      </div>
-    </div>
-    </br>
-    <div class="row">       
-      {% for image in images %} 
-              <div class="col-6 border">
-              </br>
-                    <div>
-                      <img width="512 px" height="512 px" src="{{ image.image_url }}| safe">
-                    </div>
-
-                    <div>
-                      <h4> {{ image['title']| safe }} </h4>  
-                    </div>
-              </div>
-              
-            {% endfor %}
-    </div> 
-
-  <hr>
-  
-</body>
-
-</html>
-
-
-<!-- Container-2 Featured Image and Facts -->
 <div class="container" id="cont-1">
   <div class="row">
     <div class="col-md-7">&#160;
-      <div class="box bg-style2">
-        <h3>Featured Mars Image</h3>
+      <div class="box bg-style">
+        <h3>Latest Mars News</h3>
         <hr class="new1">
-        <img src="{{mars_info.featured_image_url}}" alt="Featured Mars Image" id="featured-image">
+
+        <h6>{{ mars_info.title }}</h6>
+        <p>{{mars_info.paragraph}}</p>
+
       </div>
     </div>
     <br>
-    
-    <div class="col-md-5" id="weather-box">
-      <div class="text-white bg-style sty">
-        <h3>Mars Facts</h3>
-        <hr class="new1">
-        {{mars_info.mars_facts|safe}}
-      </div>
-    </div>
   </div>
 </div>
+<div class="container" id="cont-1">
+  <div class="row">
+    <div class="col-md-7">&#160;
+      <div class="box bg-style">
+        <div class="table">
+          <div class="border">
+            <h5>Mars Facts</h5>
+            {{ mars_info.table | safe }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <div class="container" id="cont-1">
+      <div class="row">
+        <div class="col-sm-12">&#160;
+          <h3 class="text-marsH">Mars Hemispheres</h3>
+          <hr class="new1">
+        </div>
+
+        <div class="row">
+          {% for item in mars_info.hemispheres %}
+          <div class="col-md-6">
+            <br>
+            <div class="box bg-style2">
+              <div class="col-md-6">
+                <img class="card-img-top hem-pics" src="{{ item.image_url }}" />
+                <div class="card-body">
+                  <p class="card-text">{{ item.title }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    </body>
+
+
+</html>

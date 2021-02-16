@@ -23,7 +23,7 @@ def home():
 
    mars_info = mars.mars_info.find_one()
   
-   return render_template('index2.html', mars_info=mars_info)
+   return render_template('index.html', mars_info=mars_info)
    
 # Route that will trigger the scrape function
 @flask_app.route("/scrape")
