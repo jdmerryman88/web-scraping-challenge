@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<div class="jumbotron text-center border-bottom">
+  <h1 class="font-weight-bold">Mission to Mars</h1>
+  <p><a class="btn btn-primary btn-lg" href="../scrape" role="button">Scrape New Data</a></p>
+</div>
+
+<div class="container" id="cont-1">
+  <div class="row">
+    <div class="col-md-7">&#160;
+      <div class="box bg-style">
+        <h3>Latest Mars News</h3>
+        <hr class="new1">
+
+        <h4>{{ mars_info.title }}</h4>
+        <p>{{mars_info.paragraph}}</p>
+
+      </div>
+    </div>
+    <br>
+  </div>
+</div>
+<div class="container" id="cont-1">
+  <div class="row">
+    <div class="col-md-3">&#160;</div>
+    <div class="col-md-7">&#160;
+      <div class="box bg-style"></div>
+        <div class="table">
+          <div class="border">
+            <h3>Mars Facts</h3>
+            <h5>{{ mars_info.table | safe }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <div class="container" id="cont-1">
+      <div class="row">
+        
+        <div class="col-sm-12">&#160;
+          <h3 class="text-center"> Mars Hemispheres </h3>
+          <hr class="new1">
+        </div>
+        
+
+        <div class="row">
+          {% for item in mars_info.hemispheres %}
+          <div class="col-md-6">
+            <br>
+            <div class="card" style="width: 30rem;">
+              <img class="card-img-top" src="{{ item.image_url }}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">{{ item.title }}</h5>
+                
+                
+              </div>
+            </div>
+           
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    </body>
+
+
+</html>

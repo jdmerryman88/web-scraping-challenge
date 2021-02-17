@@ -36,4 +36,4 @@ Use MongoDB with Flask templating to create a new HTML page that displays all of
 
 
 <img src="News_Table_Image.png"  align="center" />
-<img src="Hemispheres_Image.png"  align="center"/>
+<img src="Hemispheres_Image.png"  align="center" />
